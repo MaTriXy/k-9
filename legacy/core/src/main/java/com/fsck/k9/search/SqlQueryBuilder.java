@@ -2,10 +2,10 @@ package com.fsck.k9.search;
 
 import java.util.List;
 
-import app.k9mail.legacy.search.ConditionsTreeNode;
-import app.k9mail.legacy.search.api.SearchAttribute;
-import app.k9mail.legacy.search.api.SearchCondition;
-import app.k9mail.legacy.search.api.SearchField;
+import net.thunderbird.feature.search.ConditionsTreeNode;
+import net.thunderbird.feature.search.api.SearchAttribute;
+import net.thunderbird.feature.search.api.SearchCondition;
+import net.thunderbird.feature.search.api.SearchField;
 import timber.log.Timber;
 
 
@@ -151,28 +151,9 @@ public class SqlQueryBuilder {
         query.append(" ");
         String selectionArg = null;
         switch (condition.attribute) {
-            case NOT_CONTAINS:
-                query.append("NOT ");
-                //$FALL-THROUGH$
             case CONTAINS: {
                 query.append("LIKE ?");
                 selectionArg = "%" + value + "%";
-                break;
-            }
-            case NOT_STARTSWITH:
-                query.append("NOT ");
-                //$FALL-THROUGH$
-            case STARTSWITH: {
-                query.append("LIKE ?");
-                selectionArg = "%" + value;
-                break;
-            }
-            case NOT_ENDSWITH:
-                query.append("NOT ");
-                //$FALL-THROUGH$
-            case ENDSWITH: {
-                query.append("LIKE ?");
-                selectionArg = value + "%";
                 break;
             }
             case NOT_EQUALS: {
